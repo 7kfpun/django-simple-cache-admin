@@ -1,0 +1,53 @@
+{% extends "admin/base_site.html" %}
+
+{% block content %}
+<link rel="stylesheet" type="text/css" href="/static/admin/css/changelists.css" />
+
+<h1>Simple Cache Admin</h1>
+
+<div class="simple_cache" id="content-main">
+  <form action="" method="post">
+    {% csrf_token %}
+    {{ form.as_p }}
+
+    <input type="submit" value="Ok" />
+  </form>
+
+  <br class="clear" />
+  <code><strong>{{ value }}</strong></code>
+</div>
+
+<br class="clear" />
+
+<script type="text/javascript">
+    var action_elem = document.getElementById("id_action");
+    var key_elem = document.getElementById("id_key");
+    var timeout_elem = document.getElementById("id_timeout");
+    var value_elem = document.getElementById("id_value");
+
+    if (action_elem.value !== "UPDATE") {
+        value_elem.parentNode.style.display = "none";
+    }
+
+    if (action_elem.value === "FLUSH") {
+        key_elem.parentNode.style.display = "none";
+        timeout_elem.parentNode.style.display = "none";
+        value_elem.parentNode.style.display = "none";
+    }
+
+    action_elem.onchange = function(){
+        if (this.value === "FLUSH") {
+            key_elem.parentNode.style.display = "none";
+            timeout_elem.parentNode.style.display = "none";
+            value_elem.parentNode.style.display = "none";
+        } else {
+            key_elem.parentNode.style.display = "block";
+            timeout_elem.parentNode.style.display = "block";
+            value_elem.parentNode.style.display = "block";
+        }
+
+        value_elem.parentNode.style.display = (this.value == "UPDATE") ? "block": "none";
+    };
+
+</script>
+{% endblock %}
