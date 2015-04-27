@@ -1,5 +1,12 @@
 from setuptools import setup, find_packages
+import os
 import simple_cache_admin
+
+def read(fname):
+    try:
+        return open(os.path.join(os.path.dirname(__file__), fname)).read()
+    except IOError:
+        return ""
 
 setup(
     name="django-simple-cache-admin",
@@ -8,9 +15,8 @@ setup(
     author_email="7kfpun@gmail.com",
     url="https://github.com/7kfpun/django-simple-cache-admin",
     license="MIT",
-    keywords="memcached",
     description=" ".join(simple_cache_admin.__doc__.splitlines()).strip(),
-    long_description=open("README.md", "rt").read(),
+    long_description=read("README.md"),
     install_requires=[
         "Django>=1.6",
     ],
@@ -22,7 +28,7 @@ setup(
         "Framework :: Django",
         "Intended Audience :: Developers",
         "Intended Audience :: System Administrators",
-        "License :: OSI Approved :: MIT",
+        "License :: OSI Approved :: MIT License",
         "Operating System :: OS Independent",
         "Programming Language :: Python :: 2",
         "Programming Language :: Python :: 3",
