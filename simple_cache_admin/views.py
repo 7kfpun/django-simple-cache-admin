@@ -28,8 +28,9 @@ class SimpleCacheForm(forms.Form):
         ('FLUSH', 'FLUSH'),
     )
     CACHE_POOLS = ((pool, pool) for pool in sorted(SETTINGS['CACHES']))
-    action = forms.ChoiceField(choices=ACTIONS)
+
     pool = forms.ChoiceField(choices=CACHE_POOLS)
+    action = forms.ChoiceField(choices=ACTIONS)
     key = forms.CharField(label='Cache key', required=False, max_length=100)
     timeout = forms.IntegerField(initial=SETTINGS['TIMEOUT'], min_value=0)
     value = forms.CharField(label='New value', widget=forms.Textarea, required=False)
@@ -54,8 +55,8 @@ def simple_cache(request, *args, **kwargs):
     show_value = ''
 
     if request.method == 'POST':
-        action = request.POST.get('action')
         pool = request.POST.get('pool')
+        action = request.POST.get('action')
         key = request.POST.get('key')
         value = request.POST.get('value')
         timeout = int(request.POST.get('timeout'))
@@ -71,10 +72,11 @@ def simple_cache(request, *args, **kwargs):
             _flush(client)
 
         show_value = caches[pool].get(key)
+        logging.debug(show_value)
 
         form = SimpleCacheForm(request.POST)
 
-    return render(request, 'simple_cache_admin/cache.html', {
+    return render(request, 'simple_cache_admin/index.html', {
         'form': form,
         'value': show_value,
     })

@@ -25,28 +25,26 @@
     var timeout_elem = document.getElementById("id_timeout");
     var value_elem = document.getElementById("id_value");
 
-    if (action_elem.value !== "UPDATE") {
-        value_elem.parentNode.style.display = "none";
-    }
-
-    if (action_elem.value === "FLUSH") {
+    var toggleFields = function () {
         key_elem.parentNode.style.display = "none";
-        timeout_elem.parentNode.style.display = "none";
         value_elem.parentNode.style.display = "none";
+        timeout_elem.parentNode.style.display = "none";
+
+        if (action_elem.value === "GET") {
+            key_elem.parentNode.style.display = "block";
+        } else if (action_elem.value === "UPDATE") {
+            key_elem.parentNode.style.display = "block";
+            value_elem.parentNode.style.display = "block";
+            timeout_elem.parentNode.style.display = "block";
+        } else if (action_elem.value === "DELETE") {
+            key_elem.parentNode.style.display = "block";
+        }
     }
 
-    action_elem.onchange = function(){
-        if (this.value === "FLUSH") {
-            key_elem.parentNode.style.display = "none";
-            timeout_elem.parentNode.style.display = "none";
-            value_elem.parentNode.style.display = "none";
-        } else {
-            key_elem.parentNode.style.display = "block";
-            timeout_elem.parentNode.style.display = "block";
-            value_elem.parentNode.style.display = "block";
-        }
+    toggleFields();
 
-        value_elem.parentNode.style.display = (this.value == "UPDATE") ? "block": "none";
+    action_elem.onchange = function() {
+        toggleFields();
     };
 
 </script>
