@@ -9,7 +9,6 @@ import os
 logger = logging.getLogger(__name__)
 
 SETTINGS = {
-    'REFRESH_RATE': 5000,
     'TIMEOUT': 60 * 60,
     'CACHES': settings.CACHES,
 }

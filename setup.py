@@ -7,7 +7,7 @@ setup(
     author="kf",
     author_email="7kfpun@gmail.com",
     url="https://github.com/7kfpun/django-simple-cache-admin",
-    license="LGPLv3+",
+    license="MIT",
     keywords="memcached",
     description=" ".join(simple_cache_admin.__doc__.splitlines()).strip(),
     long_description=open("README.md", "rt").read(),
