@@ -1,0 +1,4 @@
+include LICENSE
+include README.md
+recursive-include simple_cache_admin/static *
+recursive-include simple_cache_admin/templates *
